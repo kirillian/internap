@@ -68,7 +68,12 @@ class InternapAdaptor
 	def get_FVSS_pub_points
 		response = @wsdl.GetFVSSPubPoints(:strHash => hash, :strUserName => @username)
 		@wsdl.reset_stream
-		response.getFVSSPubPointsResult.vS_FVSSPubPoint
+		list = response.getFVSSPubPointsResult.vS_FVSSPubPoint rescue []
+		if !list.respond_to?("each")
+			list = Array.new().push(list)
+		end
+
+		list
 	end
 
 	def remove_pub_point(name, secure)

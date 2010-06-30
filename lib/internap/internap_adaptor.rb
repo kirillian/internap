@@ -13,7 +13,7 @@ require 'digest'
 #
 ################################################################################
 
-class InternapSoapConnection
+class InternapAdaptor
 	attr_accessor :wsdl_url, :username, :password, :wsdl
 
 	def initialize(wsdl_url, username = nil, password = nil)
@@ -78,7 +78,6 @@ class InternapSoapConnection
 	end
 
 	def update_pub_point(name, source, publishing_point_type, location, compartment_id, status, cluster_id, secure)
-		puts "Updating: #{name} | #{source} | #{publishing_point_type} | #{location} | #{compartment_id} | #{status} | #{cluster_id} | #{secure}"
 		response = @wsdl.UpdatePubPoint(:strHash => hash, :strUserName => @username, :strPubPointName => name, :strSource => source, :enumType => publishing_point_type, :enumLocation => location, :intCompartmentID => compartment_id, :intStatus => status, :intClusterID => cluster_id, :blnSecure => secure)
 		@wsdl.reset_stream
 		response.updatePubPointResult

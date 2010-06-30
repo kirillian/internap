@@ -1,0 +1,10 @@
+internap:
+  connection_url: http://publicws.internapcdn.com/FlashPubPointsWS/PubMan.asmx
+  username: some_username
+  password: some_password
+
+# Stream Defaults
+stream:
+  location: los_angeles
+  publishing_point_type: BroadcastPush
+  secure: true

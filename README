@@ -1,0 +1,27 @@
+Internap
+========
+
+Ruby API to provide DRY implementation of the Internap Streaming Web Service
+API while still providing the same flexibility.
+
+
+Example
+=======
+
+Currently supported methods include:
+
+Create a new publishing point:
+Internap.create_broadcast_publishing_point(stream_name, location, publishing_point_type, secure_setting)
+
+Remove an existing publishing point:
+Internap.remove_publishing_point(stream_name, secure_setting)
+
+Modify an existing publishing point:
+Internap.modify_publishing_point(stream_name, location, publishing_point_type, secure_setting)
+
+Retrieve an array list of the current publishing points:
+Internap.current_publishing_points()
+
+=======
+
+Copyright (c) 2010 John Epperson, released under the MIT license

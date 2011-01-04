@@ -45,7 +45,7 @@ class Internap
 		streams = @@internap_adaptor.get_FVSS_pub_points.select{|point|
 			point.name == stream_name
 		}
-
+		
 		if streams && streams.length == 1
 			@@internap_adaptor.update_pub_point(stream_name, LOCATIONS[location.to_sym][:url], publishing_point_type, LOCATIONS[location.to_sym][:name], streams.first.vS_CompartmentRefID, streams.first.status, streams.first.vS_FVSSGatewayClusterID, secure_setting)
 		else
@@ -56,6 +56,10 @@ class Internap
 	def self.current_publishing_points()
 		@@internap_adaptor.get_FVSS_pub_points()
 	end
+
+  def self.get_publishing_point(name)
+    @@internap_adaptor.get_FVSS_pub_point(name)
+  end
 
 	class InternapError < StandardError; end
 end

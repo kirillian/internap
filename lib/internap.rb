@@ -42,22 +42,39 @@ class Internap
 	end
 
 	def self.modify_publishing_point(stream_name, location = @@default_stream_location, publishing_point_type = @@default_publishing_point_type, secure_setting = @@default_secure_setting)
-		streams = @@internap_adaptor.get_FVSS_pub_points.select{|point|
-			point.name == stream_name
-		}
-
-		if streams && streams.length == 1
-			@@internap_adaptor.update_pub_point(stream_name, LOCATIONS[location.to_sym][:url], publishing_point_type, LOCATIONS[location.to_sym][:name], streams.first.vS_CompartmentRefID, streams.first.status, streams.first.vS_FVSSGatewayClusterID, secure_setting)
-		else
-			raise InternapError, "Stream name not found or multiple streams found with the same name."
-		end
+		stream = self.map_internap_publishing_point_info(self.get_publishing_point(stream_name))
+		@@internap_adaptor.update_pub_point(stream_name, LOCATIONS[location.to_sym][:url], publishing_point_type, LOCATIONS[location.to_sym][:name], stream[:compartment_ref_id], stream[:status], stream[:fvss_gateway_cluster_id], secure_setting)
 	end
 
 	def self.current_publishing_points()
 		@@internap_adaptor.get_FVSS_pub_points()
 	end
 
+	def self.get_publishing_point(stream_name)
+		@@internap_adaptor.get_FVSS_pub_point(stream_name)
+	end
+
 	class InternapError < StandardError; end
+
+	protected
+
+	def self.map_internap_publishing_point_info(publishing_point_info)
+		{:fvss_pub_points_id => publishing_point_info.vS_FVSSPubPointsID,
+		  :fvss_gateway_cluster_id => publishing_point_info.vS_FVSSGatewayClusterID,
+		  :compartment_ref_id => publishing_point_info.vS_CompartmentRefID,
+		  :domain_id => publishing_point_info.domainID,
+		  :name => publishing_point_info.name,
+		  :local_application_name => publishing_point_info.localApplicationName,
+		  :status => publishing_point_info.status,
+		  :single_pull_location => publishing_point_info.singlePullLocation,
+		  :source => publishing_point_info.source,
+		  :type => publishing_point_info.type,
+		  :server_side_buffer => publishing_point_info.serverSideBuffer,
+		  :delete_pending? => publishing_point_info.isDeletePending,
+		  :created => publishing_point_info.created,
+		  :deleted => publishing_point_info.deleted
+		}
+	end
 end
 
 Internap.instance

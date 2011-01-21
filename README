@@ -5,6 +5,25 @@ Ruby API to provide DRY implementation of the Internap Streaming Web Service
 API while still providing the same flexibility.
 
 
+Install
+=======
+
+To install this plugin, you will need to copy the internap.yml included in the
+examples folder to your configuration folder and edit the contents appropriately.
+
+The things you will need are:
+internap:
+  connection_url: http://publicws.internapcdn.com/FlashPubPointsWS/PubMan.asmx
+  username: <Your internap username>
+  password: <Your internap password>
+
+stream:
+  location: <name of publishing location (check the lib/internap/internap_publishing_points.rb
+                for a current list of supported names)>
+  publishing_point_type: <type of publishing point to use (You will need to
+                Internap's documentation for a full list of these)>
+  secure: <true/false (do you want to make a secure type connection or not?)>
+
 Example
 =======
 
@@ -21,6 +40,9 @@ Internap.modify_publishing_point(stream_name, location, publishing_point_type, s
 
 Retrieve an array list of the current publishing points:
 Internap.current_publishing_points()
+
+Get the information for a specific publishing point:
+Internap.get_publishing_point(stream_name)
 
 =======
 

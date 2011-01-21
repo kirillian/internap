@@ -12,6 +12,10 @@ LOCATIONS = {
 		:name => "Amsterdam",
 		:url => "fmgw-am4-001.vitalstreamcdn.com"
 	},
+	:atlanta => {
+		:name => "Atlanta",
+		:url => "fmgw.acs006.internap.com"
+	},
 	:london => {
 		:name => "London",
 		:url => "fmgw-uk1-001.vitalstreamcdn.com"
@@ -19,6 +23,10 @@ LOCATIONS = {
 	:los_angeles => {
 		:name => "LosAngeles",
 		:url => "fmgw-es8-001.vitalstreamcdn.com"
+	},
+	:sunnyvale => {
+		:name => "Sunnyvale",
+		:url => "fmgw.sje008.internap.com"
 	},
 	:virginia => {
 		:name => "Virginia",

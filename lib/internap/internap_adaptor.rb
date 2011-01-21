@@ -106,7 +106,6 @@ class InternapAdaptor
 		response = @wsdl.UpdatePubPoint(:strHash => hash, :strUserName => @username, :strPubPointName => name, :strSource => source, :enumType => publishing_point_type, :enumLocation => location, :intCompartmentID => compartment_id, :intStatus => status, :intClusterID => cluster_id, :blnSecure => secure)
 		@wsdl.reset_stream
 		response.updatePubPointResult
-		
 	rescue SOAP::FaultError => exception
     	return nil_pub_point
 	end

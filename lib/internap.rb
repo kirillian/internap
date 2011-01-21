@@ -53,7 +53,7 @@ class Internap
 	def self.get_publishing_point(stream_name)
 		@@internap_adaptor.get_FVSS_pub_point(stream_name)
 	end
-
+	
 	class InternapError < StandardError; end
 
 	protected
